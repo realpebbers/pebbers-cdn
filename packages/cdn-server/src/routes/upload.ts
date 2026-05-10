@@ -5,7 +5,6 @@ import { UploadError } from "../lib/errors";
 import { uploadFile } from "../lib/s3";
 
 export const uploadRoute = new Hono();
-// TODO BOMBACLART LAMBDA
 
 uploadRoute.post(
   "/",
@@ -14,7 +13,7 @@ uploadRoute.post(
     const body = c.req.valid("form");
 
     try {
-      await uploadFile(body.payload.name, body.payload.stream(), "text/plain");
+      await uploadFile(body.payload.name, body.payload.stream());
     } catch (err) {
       if (err instanceof UploadError) {
         return c.json({ message: err.message }, 501);

@@ -1,4 +1,4 @@
-import { S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import { env } from "./env";
 import { UploadError } from "./errors";
@@ -12,18 +12,13 @@ export const s3Client = new S3Client({
   },
 });
 
-export async function uploadFile(
-  key: string,
-  body: ReadableStream,
-  contentType: string,
-) {
+export async function uploadFile(key: string, body: ReadableStream) {
   const upload = new Upload({
     client: s3Client,
     params: {
       Bucket: BUCKET,
       Key: key,
       Body: body,
-      ContentType: contentType,
     },
   });
 

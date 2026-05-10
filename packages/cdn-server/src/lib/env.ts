@@ -1,4 +1,3 @@
-import Bun from "bun";
 import { z } from "zod";
 
 const envSchema = z.object({
@@ -9,7 +8,7 @@ const envSchema = z.object({
   SECRET_ACCESS_KEY: z.string(),
 });
 
-const parsedEnv = envSchema.safeParse(Bun.env);
+const parsedEnv = envSchema.safeParse(process.env);
 
 if (!parsedEnv.success) {
   console.error(

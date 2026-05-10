@@ -8,7 +8,9 @@
     ]
   },
   "scripts": {
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "deploy": "turbo run deploy"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -17,6 +19,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "turbo": "^2.9.9"
+    "turbo": "^2.9.12"
   }
 }
