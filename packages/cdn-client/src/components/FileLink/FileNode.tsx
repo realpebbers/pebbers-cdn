@@ -1,4 +1,6 @@
+import { clsx } from "clsx";
 import { useState } from "react";
+import { useFiles } from "../../store/useFiles.ts";
 import { FileTree } from "../Files/FileTree.tsx";
 import styles from "./FileNode.module.css";
 
@@ -13,6 +15,9 @@ export function FileNode({ type, name }: FileLinkProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [hasLoaded, setHasLoaded] = useState(false);
 
+	const isSelected = useFiles((st) => st.selectedFiles.has(name));
+	const select = useFiles((st) => st.selectOne);
+
 	let showOnOpened = true;
 
 	const cleanName =
@@ -25,10 +30,14 @@ export function FileNode({ type, name }: FileLinkProps) {
 
 	if (type === "file") {
 		return (
-			<li>
-				<a className={styles.treeElement} href={`/${name}`}>
+			<li className={clsx(styles.treeElement, isSelected && styles.selected)}>
+				<span
+					onFocus={() => select(name)}
+					onKeyDown={() => {}} // TODO: open
+					onClick={() => select(name)}
+				>
 					{cleanName}
-				</a>
+				</span>
 			</li>
 		);
 	}
@@ -51,15 +60,19 @@ export function FileNode({ type, name }: FileLinkProps) {
 	}
 
 	return (
-		<li>
-			<span
-				className={styles.treeElement}
-				onClick={() => toggleOpen()}
-				onKeyDown={() => toggleOpen()}
-			>
-				{isOpen ? "📂" : "📁"}
-				{cleanName}
-			</span>
+		<li
+			className={clsx(styles.treeElement, type === "root" && styles.treeRoot)}
+		>
+			<div>
+				<span
+					onClick={() => select(name)}
+					onFocus={() => select(name)}
+					onKeyDown={() => toggleOpen()}
+				>
+					{isOpen ? "📂" : "📁"}
+					{cleanName}
+				</span>
+			</div>
 			{everOpened && (
 				<FileTree
 					prefix={type === "root" ? undefined : name}

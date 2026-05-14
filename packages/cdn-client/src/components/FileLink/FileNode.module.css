@@ -1,6 +1,37 @@
-﻿.tree-element {
+﻿.tree-root {
+	position: relative;
+	overflow: hidden;
+}
+
+.tree-element {
 	cursor: default;
 	user-select: none;
+	position: relative;
+}
+.tree-element > span {
+	display: block;
+}
+
+.tree-element.selected::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	bottom: 0;
+	/*width: 100%;*/
+	left: -99px;
+	right: -150px;
+
+	background: var(--info);
+}
+.tree-element::after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	bottom: 0;
+	left: -99px;
+	right: -150px;
 }
 
 /*.folder {*/
