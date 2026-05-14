@@ -1,7 +1,12 @@
 .files-root {
 	display: flex;
 	flex-direction: column;
-	padding-left: 0;
+	padding-left: 1rem;
+	margin: 0;
+}
+
+.files-root > p {
+	margin: 0;
 }
 
 .files-root[data-open="false"] {

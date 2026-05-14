@@ -1,28 +1,34 @@
 import { useState } from "react";
 import { FileTree } from "../Files/FileTree.tsx";
+import styles from "./FileNode.module.css";
 
 interface FileLinkProps {
-	type: "file" | "folder";
+	type: "file" | "folder" | "root";
 
-	name: string;
+	name?: string;
 }
 
 export function FileNode({ type, name }: FileLinkProps) {
-	const [everOpened, setEverOpened] = useState(false);
+	const [everOpened, setEverOpened] = useState(type === "root");
 	const [isOpen, setIsOpen] = useState(false);
 	const [hasLoaded, setHasLoaded] = useState(false);
 
 	let showOnOpened = true;
 
-	const cleanName = name
-		.split("/")
-		.filter((s) => s)
-		.pop();
+	const cleanName =
+		type !== "root"
+			? name
+					.split("/")
+					.filter((s) => s)
+					.pop()
+			: name;
 
 	if (type === "file") {
 		return (
 			<li>
-				<a href={`/${name}`}>{cleanName}</a>
+				<a className={styles.treeElement} href={`/${name}`}>
+					{cleanName}
+				</a>
 			</li>
 		);
 	}
@@ -31,7 +37,7 @@ export function FileNode({ type, name }: FileLinkProps) {
 		if (everOpened) {
 			if (hasLoaded) {
 				setIsOpen(!isOpen);
-			} else {
+			} else if (type !== "root") {
 				showOnOpened = !showOnOpened;
 			}
 		} else {
@@ -46,12 +52,20 @@ export function FileNode({ type, name }: FileLinkProps) {
 
 	return (
 		<li>
-			<span onClick={() => toggleOpen()} onKeyDown={() => toggleOpen()}>
+			<span
+				className={styles.treeElement}
+				onClick={() => toggleOpen()}
+				onKeyDown={() => toggleOpen()}
+			>
 				{isOpen ? "📂" : "📁"}
 				{cleanName}
 			</span>
 			{everOpened && (
-				<FileTree prefix={name} onLoad={onLoaded} isOpen={isOpen} />
+				<FileTree
+					prefix={type === "root" ? undefined : name}
+					onLoad={onLoaded}
+					isOpen={isOpen}
+				/>
 			)}
 		</li>
 	);

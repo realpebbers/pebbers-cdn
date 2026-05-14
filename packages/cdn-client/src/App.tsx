@@ -1,8 +1,8 @@
 import "./App.css";
-import { FileTree } from "./components";
+import { FileNode } from "./components";
 
 function App() {
-	return <FileTree />;
+	return <FileNode type="root" name="pebbers-cdn" />;
 }
 
 export default App;

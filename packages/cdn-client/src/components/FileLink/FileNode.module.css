@@ -1,4 +1,10 @@
-﻿.folder {
-	cursor: pointer;
+﻿.tree-element {
+	cursor: default;
 	user-select: none;
 }
+
+/*.folder {*/
+/*}*/
+
+/*.file {*/
+/*}*/

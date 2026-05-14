@@ -15,6 +15,8 @@ export function FileTree({ prefix, onLoad, isOpen }: FileTreeProps) {
 	const [files, setFiles] = useState<CdnFile[]>([]);
 	const [folders, setFolders] = useState<CdnFolder[]>([]);
 
+	const isEmpty = files.length === 0 && folders.length === 0;
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: onLoad is a one-shot signal
 	useEffect(() => {
 		client
@@ -42,6 +44,7 @@ export function FileTree({ prefix, onLoad, isOpen }: FileTreeProps) {
 			{files.map((file) => (
 				<FileNode key={file.key} type="file" name={file.key} />
 			))}
+			{isEmpty && isOpen && <p>Empty</p>}
 		</ul>
 	);
 }
