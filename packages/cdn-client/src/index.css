@@ -1,0 +1,23 @@
+:root {
+	--bg: #2e2e3a;
+	--text: #d7d9d7;
+
+	--mono: "Jetbrains Mono", ui-monospace, Consolas, monospace;
+
+	font: 18px / 145% var(--mono);
+	letter-spacing: 0.18px;
+
+	background: var(--bg);
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@media (max-width: 1024px) {
+		font-size: 16px;
+	}
+}
+
+body {
+	margin: 0;
+}

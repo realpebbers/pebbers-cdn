@@ -1,0 +1,13 @@
+.files-root {
+	display: flex;
+	flex-direction: column;
+	padding-left: 0;
+}
+
+.files-root[data-open="false"] {
+	display: none;
+}
+
+.files-child {
+	padding-left: 2rem;
+}

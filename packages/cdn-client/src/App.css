@@ -1,0 +1,10 @@
+a {
+	text-decoration: none;
+	color: var(--text);
+}
+
+li {
+	text-decoration: none;
+	color: var(--text);
+	list-style-type: none;
+}
