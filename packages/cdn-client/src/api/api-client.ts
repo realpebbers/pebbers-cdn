@@ -4,7 +4,7 @@ import type { RouterClient } from "@orpc/server";
 import type { RouterType } from "@pebbers/cdn-server";
 
 const link = new RPCLink({
-	url: "http://localhost:6767/rpc",
+	url: "https://cdn.pebbers.dev/rpc",
 	headers: () => ({
 		authorization: "Bearer token",
 	}),

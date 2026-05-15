@@ -49,8 +49,8 @@ export function FileNode({ type, name }: FileLinkProps) {
 		}
 		if (isSelected) {
 			select(name); // Select self, also deselects the other files
-			if (type === "folder") toggleOpen();
-			else navigate(`/${name}`, { replace: true });
+			if (type === "file") navigate(`/${name}`, { replace: true });
+			else toggleOpen();
 			return;
 		}
 		select(name);

@@ -5,9 +5,10 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc -b && vite build",
+		"build": "vite build",
 		"lint": "eslint .",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"deploy": "aws s3 sync dist/ s3://pebbers-cdn-site --delete"
 	},
 	"dependencies": {
 		"@orpc/client": "^1.14.3",
