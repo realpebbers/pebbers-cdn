@@ -14,6 +14,15 @@ export const CdnFolderSchema = z.object({
 export type CdnFile = z.infer<typeof CdnFileSchema>;
 export type CdnFolder = z.infer<typeof CdnFolderSchema>;
 
+export type GetFileMetaResult =
+	| { exists: false }
+	| {
+			exists: true;
+			size: number;
+			contentType?: string;
+			lastModified?: Date;
+	  };
+
 export interface GetFilesResult {
 	folders: CdnFolder[];
 	files: CdnFile[];

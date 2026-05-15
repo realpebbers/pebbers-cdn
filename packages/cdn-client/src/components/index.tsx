@@ -1,2 +1,2 @@
-export { FileNode } from "./FileLink/FileNode.tsx";
-export { FileTree } from "./Files/FileTree.tsx";
+export { FileNode } from "./FileNode/FileNode.tsx";
+export { FileTree } from "./FileTree/FileTree.tsx";

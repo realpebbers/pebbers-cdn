@@ -2,7 +2,7 @@ import type { CdnFile, CdnFolder } from "@pebbers/cdn-server";
 import { clsx } from "clsx";
 import { useEffect, useState } from "react";
 import { client } from "../../api/api-client.ts";
-import { FileNode } from "../FileLink/FileNode.tsx";
+import { FileNode } from "../FileNode/FileNode.tsx";
 import styles from "./FileTree.module.css";
 
 interface FileTreeProps {

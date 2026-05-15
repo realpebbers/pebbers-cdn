@@ -12,6 +12,12 @@ export class GetFilesError extends CdnError {
 	}
 }
 
+export class GetFileMetaError extends CdnError {
+	constructor(options: ErrorOptions) {
+		super("Failed to retrieve file metadata from S3 Bucket", options);
+	}
+}
+
 export class GetFilePresignedError extends CdnError {
 	constructor(options: ErrorOptions) {
 		super("Failed to retrieve presigned file url from S3 Bucket", options);

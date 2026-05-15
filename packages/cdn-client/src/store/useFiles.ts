@@ -5,6 +5,7 @@ interface FilesStore {
 	lastSelectedFile: string;
 
 	selectOne(key: string): void;
+	selectMore(key: string): void;
 }
 
 export const useFiles = create<FilesStore>()((set) => ({
@@ -13,4 +14,10 @@ export const useFiles = create<FilesStore>()((set) => ({
 
 	selectOne: (key) =>
 		set({ selectedFiles: new Set([key]), lastSelectedFile: key }),
+
+	selectMore: (key) =>
+		set((st) => ({
+			selectedFiles: new Set([...st.selectedFiles, key]),
+			lastSelectedFile: key,
+		})),
 }));
