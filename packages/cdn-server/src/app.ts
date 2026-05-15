@@ -8,7 +8,7 @@ export const app = new Hono();
 const handler = new RPCHandler(router, {
 	plugins: [
 		new CORSPlugin({
-			origin: (origin, options) => origin,
+			origin: (origin, _) => origin,
 			allowMethods: ["GET", "HEAD", "PUT", "POST", "DELETE", "PATCH"],
 		}),
 	],

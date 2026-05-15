@@ -1,9 +1,14 @@
-import { ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
+import {
+	GetObjectCommand,
+	ListObjectsV2Command,
+	S3Client,
+} from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { getMimeType } from "hono/utils/mime";
-import type { CdnFolder, GetFilesResult } from "../types/cdn";
+import type { GetFilesResult } from "../types/cdn";
 import { env } from "./env";
-import { GetFilesError, UploadError } from "./errors";
+import { GetFilePresignedError, GetFilesError, UploadError } from "./errors";
 
 const s3Client = new S3Client({
 	region: env.AWS_REGION,
@@ -17,6 +22,21 @@ const s3Client = new S3Client({
 });
 
 export const BUCKET = env.S3_BUCKET;
+
+export async function getFilePresigned(key: string) {
+	try {
+		const cmd = new GetObjectCommand({
+			Bucket: BUCKET,
+			Key: key,
+		});
+
+		return await getSignedUrl(s3Client, cmd, {
+			expiresIn: 60,
+		});
+	} catch (err) {
+		throw new GetFilePresignedError({ cause: err });
+	}
+}
 
 export async function getFiles(
 	maxFiles: number = 50,

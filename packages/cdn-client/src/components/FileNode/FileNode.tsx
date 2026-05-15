@@ -30,14 +30,13 @@ export function FileNode({ type, name }: FileLinkProps) {
 
 	if (type === "file") {
 		return (
-			<li className={clsx(styles.treeElement, isSelected && styles.selected)}>
-				<span
-					onFocus={() => select(name)}
-					onKeyDown={() => {}} // TODO: open
-					onClick={() => select(name)}
-				>
-					{cleanName}
-				</span>
+			<li
+				onFocus={() => select(name)}
+				onKeyDown={() => {}} // TODO: open
+				onClick={() => select(name)}
+				className={clsx(styles.treeElement, isSelected && styles.selected)}
+			>
+				<span>{cleanName}</span>
 			</li>
 		);
 	}
@@ -63,12 +62,12 @@ export function FileNode({ type, name }: FileLinkProps) {
 		<li
 			className={clsx(styles.treeElement, type === "root" && styles.treeRoot)}
 		>
-			<div>
-				<span
-					onClick={() => select(name)}
-					onFocus={() => select(name)}
-					onKeyDown={() => toggleOpen()}
-				>
+			<div
+				onClick={() => select(name)}
+				onFocus={() => select(name)}
+				onKeyDown={() => toggleOpen()}
+			>
+				<span>
 					{isOpen ? "📂" : "📁"}
 					{cleanName}
 				</span>
