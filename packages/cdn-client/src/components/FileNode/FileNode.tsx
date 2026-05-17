@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
 import { useState } from "react";
+import { FaCopy } from "react-icons/fa6";
 import { navigate } from "wouter/use-browser-location";
 import { useFiles } from "../../store/useFiles.ts";
 import { FileTree } from "../FileTree/FileTree.tsx";
@@ -62,9 +63,20 @@ export function FileNode({ type, name }: FileLinkProps) {
 				onFocus={() => select(name)}
 				onKeyDown={() => {}}
 				onClick={handleClick}
+				onContextMenu={(e) => {
+					e.preventDefault();
+				}}
 				className={clsx(styles.treeElement, isSelected && styles.selected)}
 			>
 				<span>{cleanName}</span>
+				<FaCopy
+					onClick={(e) => {
+						e.stopPropagation();
+						navigator.clipboard
+							.writeText(`https://cdn.pebbers.dev/uploads/${name}`)
+							.catch(console.error);
+					}}
+				/>
 			</li>
 		);
 	}

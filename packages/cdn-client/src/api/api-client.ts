@@ -3,8 +3,12 @@ import { RPCLink } from "@orpc/client/fetch";
 import type { RouterClient } from "@orpc/server";
 import type { RouterType } from "@pebbers/cdn-server";
 
+const baseUrl = import.meta.env.DEV
+	? "http://localhost:6767"
+	: "https://cdn.pebbers.dev";
+
 const link = new RPCLink({
-	url: "https://cdn.pebbers.dev/rpc",
+	url: `${baseUrl}/rpc`,
 	headers: () => ({
 		authorization: "Bearer token",
 	}),

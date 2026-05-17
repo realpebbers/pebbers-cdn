@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { client } from "../../api/api-client.ts";
 import { isImageMime, isMimeType } from "../../lib/mime.ts";
 
@@ -56,6 +56,7 @@ export function FileView() {
 	return (
 		<>
 			<header>
+				<Link href="/">{"<"}</Link>
 				<i>{exists ? location : "File not found"}</i>
 			</header>
 

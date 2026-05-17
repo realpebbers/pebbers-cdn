@@ -7,9 +7,11 @@
 	cursor: default;
 	user-select: none;
 	position: relative;
+	display: flex;
+	align-items: center;
 }
 .tree-element > span {
-	display: block;
+	margin: 0 0.5rem;
 }
 
 .tree-element.selected::before {
