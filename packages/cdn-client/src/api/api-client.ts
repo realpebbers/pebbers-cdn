@@ -15,6 +15,8 @@ const link = new RPCLink({
 	// fetch: <-- provide fetch polyfill fetch if needed
 	interceptors: [
 		onError((error) => {
+			if (error instanceof Error && error.name === "AbortError") return;
+
 			console.error(error);
 		}),
 	],

@@ -1,5 +1,7 @@
-﻿import { FileNode } from "../../components";
+﻿// import { FileNode } from "../../components";
+
+import { S3Explorer } from "@/components";
 
 export function TreeView() {
-	return <FileNode type="root" name="pebbers-cdn" />;
+	return <S3Explorer />;
 }

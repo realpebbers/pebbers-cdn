@@ -9,5 +9,10 @@ export default defineConfig({
 			localsConvention: "camelCaseOnly",
 		},
 	},
+	resolve: {
+		alias: {
+			"@": "/src",
+		},
+	},
 	plugins: [react(), tailwindcss()],
 });
