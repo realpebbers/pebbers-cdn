@@ -11,8 +11,19 @@ export const CdnFolderSchema = z.object({
 	prefix: z.string(),
 });
 
+export const S3BucketSchema = z.object({
+	name: z.string(),
+	region: z.string(),
+});
+
 export type CdnFile = z.infer<typeof CdnFileSchema>;
 export type CdnFolder = z.infer<typeof CdnFolderSchema>;
+export type S3Bucket = z.infer<typeof S3BucketSchema>;
+
+export const DEFAULT_BUCKET: S3Bucket = {
+	region: "eu-central-1",
+	name: "pebbers-cdn",
+};
 
 export type GetFileMetaResult =
 	| { exists: false }

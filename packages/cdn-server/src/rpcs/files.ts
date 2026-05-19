@@ -1,7 +1,8 @@
-import { ORPCError, os } from "@orpc/server";
+import { ORPCError } from "@orpc/server";
 import z from "zod";
 import { GetFilesError } from "../lib/errors.ts";
 import { getFiles } from "../lib/s3";
+import { authed, pub } from "./auth-middleware.ts";
 
 const FilesRouteSchema = z.object({
 	maxFiles: z.number().optional().default(50),
@@ -9,7 +10,8 @@ const FilesRouteSchema = z.object({
 	nextToken: z.string().optional(),
 });
 
-export const getFilesRPC = os
+export const getFilesRPC = pub
+	.use(authed)
 	.input(FilesRouteSchema)
 	.handler(async ({ input }) => {
 		try {

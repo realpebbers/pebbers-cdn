@@ -1,4 +1,4 @@
-import { createORPCClient, onError } from "@orpc/client";
+import { createORPCClient, ORPCError, onError } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import type { RouterClient } from "@orpc/server";
 import type { RouterType } from "@pebbers/cdn-server";
@@ -12,10 +12,11 @@ const link = new RPCLink({
 	headers: () => ({
 		authorization: "Bearer token",
 	}),
-	// fetch: <-- provide fetch polyfill fetch if needed
+	fetch: (url, init) => fetch(url, { ...init, credentials: "include" }),
 	interceptors: [
 		onError((error) => {
 			if (error instanceof Error && error.name === "AbortError") return;
+			if (error instanceof ORPCError && error.code === "UNAUTHORIZED") return;
 
 			console.error(error);
 		}),

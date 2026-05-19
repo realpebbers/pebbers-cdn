@@ -6,6 +6,9 @@ const envSchema = z.object({
 	S3_BUCKET: z.string(),
 	ACCESS_KEY_ID: z.string().optional(),
 	SECRET_ACCESS_KEY: z.string().optional(),
+
+	PASSWORD: z.string(),
+	PASSWORD_SECRET: z.string(),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);

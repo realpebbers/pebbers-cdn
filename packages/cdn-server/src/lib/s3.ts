@@ -39,7 +39,7 @@ export async function getFileMeta(key: string): Promise<GetFileMetaResult> {
 		return {
 			exists: true,
 			size: meta.ContentLength ?? 0,
-			contentType: meta.ContentType,
+			contentType: meta.ContentType?.split(";")[0],
 			lastModified: meta.LastModified,
 		};
 	} catch (err) {
@@ -106,6 +106,8 @@ export async function getFiles(
 		throw new GetFilesError({ cause: (err as Error).cause });
 	}
 }
+
+export async function uploadFilePresigned() {}
 
 export async function uploadFile(
 	key: string,

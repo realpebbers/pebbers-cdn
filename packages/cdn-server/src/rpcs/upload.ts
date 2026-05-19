@@ -1,9 +1,11 @@
-import { ORPCError, os } from "@orpc/server";
+import { ORPCError } from "@orpc/server";
 import z from "zod";
 import { UploadError } from "../lib/errors";
 import { uploadFile } from "../lib/s3";
+import { authed, pub } from "./auth-middleware";
 
-export const uploadFileRPC = os
+export const uploadFileRPC = pub
+	.use(authed)
 	.input(z.object({ payload: z.file() }))
 	.handler(async ({ input }) => {
 		try {

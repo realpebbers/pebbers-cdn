@@ -1,9 +1,11 @@
-﻿import { ORPCError, os } from "@orpc/server";
+﻿import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 import { GetFilePresignedError } from "../lib/errors.ts";
 import { getFilePresigned } from "../lib/s3.ts";
+import { authed, pub } from "./auth-middleware.ts";
 
-export const getFilePresignedRPC = os
+export const getFilePresignedRPC = pub
+	.use(authed)
 	.input(z.object({ key: z.string() }))
 	.handler(async ({ input }) => {
 		try {
